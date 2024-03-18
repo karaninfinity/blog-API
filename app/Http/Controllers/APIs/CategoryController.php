@@ -33,6 +33,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {   
+        $image_name = null;
         if($request->hasFile("category_image")){
             $image = $request->file('category_image');
             $image_name = time()."_".$image->getClientOriginalName();
