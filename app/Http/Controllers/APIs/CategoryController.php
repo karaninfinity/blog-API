@@ -56,7 +56,12 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Category::where("id", $id)->first();
+
+        return response()->json([
+            "success" => true,
+            "data" => $data
+        ]);
     }
 
     /**
