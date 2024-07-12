@@ -96,10 +96,6 @@ class CategoryController extends Controller
                 'status' => $request->status,
             ]);
         }
-
-        return response()->json([
-            "success" => $data
-        ]);
     }
 
     /**
@@ -107,15 +103,20 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $category = Category::find($id);
+        $category = Category::with('subcategories')->find($id);
 
-        if($category){
-            $category->delete();
+        if(!$category){
+            return response()->json([
+                'success' => false,
+                'message' => 'Category not found',
+            ]);
         }
-
+            
+        $category->delete();
+    
         return response()->json([
             'success' => true,
-            'message' => 'Category deleted successfully',
+            'message' => 'Category and its subcategories deleted successfully',
         ]);
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    use HasFactory;
     protected $table = "Categories";
     protected $fillable = [
         "id",
@@ -16,5 +17,14 @@ class Category extends Model
         "created_at",
         "updated_at"
     ];
-    use HasFactory;
+
+    public function subcategories()
+    {
+        return $this->hasMany(Subcategory::class);
+    }
+
+    public function blogs()
+    {
+        return $this->hasMany(Blog::class);
+    }
 }

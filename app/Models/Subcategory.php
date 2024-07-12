@@ -7,14 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subcategory extends Model
 {
+    use HasFactory;
     protected $table="subcategories";
     protected $fillable = [
         "id",
-        "category",
+        "subcategory",
         "subcategory_image",
         "category_id",
         "created_at",
         "updated_at"
     ];
-    use HasFactory;
+
+    public function category()
+    {
+        return $this->belongsTo(category::class);    
+    }
 }
+
